@@ -4,7 +4,6 @@ from typing import Iterator, TypeVar, Union
 from black.nodes import Visitor
 from black.output import out
 from black.parsing import lib2to3_parse
-from blib2to3.pgen2 import token
 from blib2to3.pytree import Leaf, Node, type_repr
 
 LN = Union[Leaf, Node]
@@ -22,7 +21,6 @@ class DebugVisitor(Visitor[T]):
             out(f"{indent}{_type}", fg="yellow")
             self.tree_depth += 1
             for child in node.children:
-                yield from self.visit(child)
 
             self.tree_depth -= 1
             out(f"{indent}/{_type}", fg="yellow", bold=False)
